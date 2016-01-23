@@ -1,5 +1,5 @@
 {
-  "name": "docker-sloppy",
+  "name": "hello-redis",
   "scripts": {
     "start": "node app",
     "app": "nodemon app"
@@ -10,6 +10,12 @@
   "jshintConfig": {
     "esnext": true
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanzeljesheen/hello-redis.git"
+  },
+  "author": "Hanzel Jesheen",
+  "license": "GPL-3.0",
   "dependencies": {
     "co-redis": "^1.2.1",
     "koa": "^0.21.0",

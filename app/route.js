@@ -1,7 +1,17 @@
-var router = require('koa-router')();
+var	os = require('os'),
+	router = require('koa-router')();
 
 module.exports = function(redis) {
-	router.redirect('/', '/foo');
+	router.get('/', function*(next) {
+		this.body = {
+			host: os.hostname(),
+			uptime: os.uptime(),
+			os: os.platform(),
+			arch: os.arch(),
+			network: os.networkInterfaces(),
+			cpu: os.cpus()
+		};
+	});
 
 	router.get('/:key', function*(next) {
 		var val = yield redis.get(this.params.key);
