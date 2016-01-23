@@ -1,0 +1,32 @@
+lb:
+  image: 'tutum/haproxy:latest'
+  restart: always
+  links:
+    - node
+  ports:
+    - '80:80'
+  roles:
+    - global
+
+node:
+  image: 'hanzel/hello-redis'
+  target_num_containers: 3
+  deployment_strategy: high_availability
+  ports:
+    - '4000:4000'
+  environment:
+    APP_PORT: 4000
+    REDIS_IP: redis
+    REDIS_PORT: 6379
+  links:
+    - redis
+
+redis:
+  image: 'redis'
+  target_num_containers: 1
+  deployment_strategy: high_availability
+  command: redis-server --appendonly yes
+  expose:
+    - '6379'
+  volumes:
+    - /data
