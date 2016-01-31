@@ -1,15 +1,12 @@
-var	os = require('os'),
+var os = require('os'),
 	router = require('koa-router')();
 
 module.exports = function(redis) {
+	var host = os.hostname();
+
 	router.get('/', function*(next) {
 		this.body = {
-			host: os.hostname(),
-			uptime: os.uptime(),
-			os: os.platform(),
-			arch: os.arch(),
-			network: os.networkInterfaces(),
-			cpu: os.cpus()
+			host: host
 		};
 	});
 
@@ -17,14 +14,25 @@ module.exports = function(redis) {
 		var val = yield redis.get(this.params.key);
 		
 		if (val !== null) {
-			this.body = val;
+			this.body = {
+				host: host,
+				value: val
+			};
 		} else {
-			this.body = "NULL";
+			this.body = {
+				host: host,
+				value: "NULL"
+			};
 		}
 	});
 
 	router.get('/:key/:value', function*(next) {
-		this.body = yield redis.set(this.params.key, this.params.value);
+		var res = yield redis.set(this.params.key, this.params.value);
+
+		this.body = {
+			host: host,
+			result: res
+		};
 	});
 
 	return router;
