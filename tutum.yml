@@ -9,7 +9,7 @@ lb:
     - global
 
 node:
-  image: 'hanzel/hello-redis'
+  image: 'hanzel/tutum-nodejs-redis'
   target_num_containers: 3
   deployment_strategy: high_availability
   ports:

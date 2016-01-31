@@ -1,5 +1,5 @@
 {
-  "name": "hello-redis",
+  "name": "tutum-nodejs-redis",
   "scripts": {
     "start": "node app",
     "app": "nodemon app"
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hanzeljesheen/hello-redis.git"
+    "url": "git+https://github.com/hanzeljesheen/tutum-nodejs-redis.git"
   },
   "author": "Hanzel Jesheen",
   "license": "GPL-3.0",
