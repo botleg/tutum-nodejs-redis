@@ -12,8 +12,8 @@ node:
   image: 'hanzel/tutum-nodejs-redis'
   target_num_containers: 3
   deployment_strategy: high_availability
-  ports:
-    - '4000:4000'
+  expose:
+    - '4000'
   environment:
     APP_PORT: 4000
     REDIS_IP: redis
